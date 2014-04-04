@@ -4,7 +4,7 @@
 
   <ul>
     <% @list_of_decks.each do |deck| %>
-    <li><a href="#"><%= deck.topic %></a></li>
+    <li><a href= "/deck/<%=deck.id %>"><%= deck.topic %></a></li>
     <% end %>
   </ul>
 

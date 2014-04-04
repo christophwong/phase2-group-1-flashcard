@@ -1,138 +1,69 @@
-# Blog 1 Anonymous Blog
+# Web Flash Cards 1 Multiple Decks 
+ 
+##Learning Competencies 
 
-## Learning Competencies
+- Manage application complexity via proper modeling.
+- Use project management fundamentals, including division of labor.
+- Use product management fundamentals in the face of incomplete specifications.
+- Further practice with ActiveRecord, Sinatra, and ERB.
 
-* Use the MVC pattern in web applications with proper allocation of code and responsibilities to each layer
-* Model relationships in a relational database (one-to-one, one-to-many, many-to-many)
-* Use Active Record to create Associations between database tables
-* Use Active Record Validations
+##Summary 
 
-## Summary
+We're going to create a web-based flash card application, starting with one that has a single deck.  Eventually we'll add support for user-generated decks and improve the interface via AJAX.
 
-We're going to write a simple homepage with a blog.  This will be our first
-many-to-many relationship inside the context of Sinatra.  Later, we'll
-integrate user authentication.
+This will be our most complicated web application yet.  The goal is to get a feel for how you manage complexity as projects grow and become more nuanced on both the front-end and back-end.
 
-Do the [Sinatra sandbox challenge][sandbox challenge] first if you don't feel
-comfortable with the flow of a web application or how forms send data to the
-server.
+This challenge will also have dimensions of product management and everyday engineering.  Often specifications you receive are incomplete, ambiguous, or even contradictory.
 
-We'll have two core models: `Post`s and `Tag`s.  A `Post` can have many `Tag`s
-and a `Tag` can be on many `Post`s.
+##Releases
 
-You can start with the handy Sinatra skeleton in `./source`.
+###Release 0 : Application Details
 
-## Releases
+You'll pre-determine the set of decks.  Later we'll add the ability for users to add their own, but for now you can add them via `seeds.rb` if you want.  Add more than one.  Ideas:
 
-### Release 0: Controllers &amp; Routes
+* English-to-other-language dictionaries. [Try these](http://wiki.webz.cz/dict/).
+* US state capitals
+* World capitals
+* Historical events
 
-Think about your controllers and routes.  Consider making three controller files:
+Decks have many cards.  A card belongs to a single deck.  When a user signs in, they'll see a list of decks.
 
-1. `app/controllers/index.rb`
-2. `app/controllers/posts.rb`
-3. `app/controllers/tags.rb`
+Users can play a "round," which is a series of guesses over all the cards in a deck.  User should be able to see a list of all the rounds they've completed and statistics for that round (deck used, number guessed, number correct, number incorrect, etc.)
 
-The `index` controller will just have the index route, displaying your
-homepage.  All `Post`-related routes will go in the `posts` controller and all
-`Tag`-related routes will go in the `tags` controller.
+To make it easier, we'll say that a user can only use the flash cards if they're logged in.
 
-These are the operations we want to support for posts:
+###Release 1 : Routes &amp; Models
 
-1. Show me all posts
-2. Show me a particular post
-3. Create a new post
-4. Edit an existing post
-5. Delete an existing post
+Determine your routes, and use multiple controller files.  When I'm logged in, I'll want to be able to do things like:
 
-We want to support the operation for tags: "Show me all posts with a given
-tag."
+* Start a round by picking a deck
+* Play through a round
+* Get feedback on how my round went
+* See how all my past rounds went
 
-Tags will be created via the `Post`-creation form.
+What routes and models will you need?  Most likely you'll need *at least* the following models: `User`, `Deck`, `Card`, `Round`, and `Guess`.
 
-### Release 1: Models &amp; Validations
+Think about how you're going to model a `Round` in particular.  You make a guess and see the answer regardless of whether you were correct, although the system tells you whether you were correct.  If your guess was incorrect, you're given another random card so far that you haven't guessed correctly, until you've run out of guesses.
 
-Create all the necessary models and migrations to support the above.  You
-should have three models &mdash; what are they?
+There are other ways to conduct a round, but this is how we'll do it for now.  Feel free to do something more interesting if the spirit moves you.
 
-Add the appropriate validations to your models.  Read the [Rails guide to
-ActiveRecord validations][AR validations] for reference.
+###Release 2 : Simple UI
 
-For example, if your `Post` model has `body` and `title` fields, you probably
-don't want to permit a `Post` that has no `body` or `title` to be saved to the
-database.  This means adding `NOT NULL` constraints to the migrations and the
-following validations to your ActiveRecord model:
+Create a simple UI that lets you submit guesses and, if correct, advances to the next card in the round.  You should log both incorrect and correct guesses.
 
-```ruby
-class Post < ActiveRecord::Base
-  validates :body, :presence => true
-  validates :title, :presence => true
-end
-```
+When a user is done they should be redirected to a page that shows a list of all the rounds they've completed in chronological order from most recent to least recent.  On this page you should also include stats about the round, like total number of guesses, total number of cards in the round, % correct, etc.
 
-You'll have other fields and validations, to be sure.  What fields do you want your blog post to have?  Author?
+###Release 3 : Testing
+If you haven't been writing tests as you go, or even better using TDD, then now is the time to add them.  You should have ample test coverage of your model and controller.  If you want you can explore testing of your views as well.
 
-### Release 2: Design Simple Pages and Forms
+##Optimize Your Learning 
+This project is as much about project management and team dynamics as it is about the code.  What skills / lessons did you learn from working with a team?  How will you work better next time?
 
-Design simple pages and forms to implement all the above functionality.  It
-doesn't need to be styled well, but if your HTML is well-structured it will
-make it easier to style later.
+##Resources
 
-Your forms for creating and updating `Post` models should allow you to enter
-tags.  You can decide how that works, although from a user experience
-perspective it would be incredibly tedious to have to create tags elsewhere
-before a post author can use them.  However, if a post author uses a tag that
-already exists, you aren't going to want to create a new row in the `tags`
-table, but rather re-use the already-existing tag.
+* [Rspec](http://rspec.info/)
+* [shoulda-matchers](https://github.com/thoughtbot/shoulda-matchers)
+* [Capybara](https://github.com/jnicklas/capybara)
+* [Flash card example][card example]
 
-One idea might be to permit them to enter tags like this:
-
-```html
-<label for="post_tags">Tags:</label>
-<input id="post_tags" name="post[tags]" value="tag1, tag2, some other tag, a fourth tag">
-```
-
-which renders as:
-
-<label for="post_tags">Tags:</label>
-<input id="post_tags" name="post[tags]" value="tag1, tag2, some other tag, a fourth tag" class="span4">
-
-All your routes should now implement their basic functionality.  You should be
-able to list, show, create, update, and delete posts.  You should also be able
-to see all posts for a given tag at a url like
-
-```text
-http://localhost:9393/tag/apple
-```
-
-### Release 3: Error Cases
-
-Using [valid? and invalid?][valid_invalid] and the [errors][errors] methods,
-make sure you're handling your error cases gracefully.  It doesn't need to be
-perfect, but good error handling means:
-
-1. When a user makes a mistake or breaks some rule, they're informed
-2. The user is presented with an opportunity to correct the mistake, if possible
-3. The user is given as much guidance as possible about that they need to do to fix the error
-
-### Release 4: Style!  Style!  Style!
-
-You might want to do the [Layout Drill: Proper Typesetting][proper formatting
-challenge] first, if you haven't.  But following the guidelines from that
-challenge, spruce up your blog design.
-
-Make it something you're proud to look at.
-
-## Resources
-
-* [DBC Sandbox Challenge][sandbox challenge]
-* [DBC Proper Typesetting Challenge][proper formatting challenge]
-* [Active Record validations][AR validations]
-* [Active Record valid? and invalid?][valid_invalid]
-* [Active Record errors][errors]
-
-
-[sandbox challenge]: https://github.com/Devbootcamp/sinatra-sandbox-challenge
-[proper formatting challenge]: https://github.com/Devbootcamp/layout-drill-proper-typesetting-challenge
-[AR validations]: http://guides.rubyonrails.org/active_record_validations_callbacks.html
-[valid_invalid]: http://guides.rubyonrails.org/active_record_validations_callbacks.html#valid-and-invalid
-[errors]: http://guides.rubyonrails.org/active_record_validations_callbacks.html#validations_overview-errors
+[card example]: http://wiki.webz.cz/dict/

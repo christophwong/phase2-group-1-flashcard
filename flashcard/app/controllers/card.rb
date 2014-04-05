@@ -1,16 +1,10 @@
-get '/deck/:id' do
-  @deck = Deck.find(params[:id])
-  @cards = @deck.cards.all
-
-  erb :card
-end
-
 post '/card/:id' do
-
-  @answer = Card.find(params[:id]).answer
-  if @answer.downcase == params[:card][:answer].downcase
-    redirect '/'
+  @answer = Card.find(params[:id])
+  if @answer.answer.downcase == params[:card][:answer].downcase
+    Guess.create(card_id: params[:id], correct: true, round_id: Round.last.id)
+    redirect '/round/' + Round.last.id.to_s
   else
-    redirect '/deck/' + params[:id].to_s
+    Guess.create(card_id: params[:id], correct: false, round_id: Round.last.id)
+    redirect '/round/' + Round.last.id.to_s
   end
 end

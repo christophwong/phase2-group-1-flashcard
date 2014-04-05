@@ -1,6 +1,6 @@
 <div class="container">
-  <%=@cards.first.question%>
-  <form action="/card/<%=@cards.first.id%>" method="post">
+  <%=@card.question%>
+  <form action="/card/<%=@card.id%>" method="post">
     Answer: <input type="text" name="card[answer]">
     <input type="submit" value="Submit">
   </form>

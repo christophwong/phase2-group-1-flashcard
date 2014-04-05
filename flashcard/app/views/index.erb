@@ -1,12 +1,27 @@
 <div class="container">
   <h1>Welcome to Flasher!</h1>
-  <p>Please select a deck to study from!</p>
+  <p>Please sign in</p>
 
-  <ul>
-    <% @list_of_decks.each do |deck| %>
-    <li><a href= "/deck/<%=deck.id %>"><%= deck.topic %></a></li>
-    <% end %>
-  </ul>
+  <form method="post" action="/decks">
+    Email: <input type="text" name="email"><br>
+    Password: <input type="password" name="password"><br>
+    <input type="submit" value="Log In"><br><br>
+  </form>
+
+  <p>Or Create an Account!!!!!</p><br>
+
+  <% if @error %>
+    <p class="error">Your password doesn't match the password confirmation...please try again. : 0 )</p><br>
+  <% end %>
+
+  <form method="post" action="/new_user">
+    Name: <input type="text" name="name"><br>
+    Email: <input type="text" name="email"><br>
+    Password: <input type="password" name="password"><br>
+    Confirm Password: <input type="password" name="confirmation"><br>
+    <input type="submit" value="Create Account"><br>
+  </form>
+
 
 
 </div>

@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>Welcome to Flasher!</h1>
+  <p>Please select a deck to study from!</p>
+
+  <ul>
+    <% @list_of_decks.each do |deck| %>
+    <li><a href= "/deck/<%=deck.id %>"><%= deck.topic %></a></li>
+    <% end %>
+  </ul>
+
+
+  <a href="/logout">logout</a>
+  
+
+
+</div>

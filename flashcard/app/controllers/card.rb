@@ -1,6 +1,4 @@
-
 post '/card/:id' do
-
   @answer = Card.find(params[:id])
   if @answer.answer.downcase == params[:card][:answer].downcase
     redirect '/'

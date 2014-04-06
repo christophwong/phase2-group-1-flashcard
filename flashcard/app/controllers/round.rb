@@ -8,8 +8,8 @@ get '/round/:id' do
  end
   if counter > @cards.last.id
     @list_of_decks = Deck.all
-    Guess.destroy_all
-    erb :decks
+
+    redirect '/stats/' + params[:id].to_s
   else
     @card = @cards.find(counter)
     erb :card

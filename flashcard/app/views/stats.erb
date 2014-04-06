@@ -1,0 +1,18 @@
+<%= @correct_guesses.length.to_s + "/" + @round_guesses.length.to_s + "correct" %>
+
+
+<h2>Questions You Suck At</h2>
+<ul>
+  <% @incorrect_guesses.each do |guess| %>
+  <li><%= guess.card.question %></li>
+  <% end %>
+</ul>
+
+<h2>Question You Rock At</h2>
+
+<ul>
+  <% @correct_guesses.each do |guess| %>
+  <li><%= guess.card.question %></li>
+  <% end %>
+
+</ul>

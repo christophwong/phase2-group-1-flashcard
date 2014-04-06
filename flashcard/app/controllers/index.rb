@@ -11,6 +11,7 @@ post '/new_user' do  #new_user
 
     @user = User.create!(name: params[:name], email: params[:email], password: params[:password])
     session[:value] = @user.id
+    session[:name] = @user.name
     p session.inspect
     @list_of_decks = Deck.all
     erb :decks

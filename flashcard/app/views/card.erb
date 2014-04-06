@@ -1,5 +1,5 @@
 <div class="container">
-  <%=@card.question%>
+  <p class="question"><%=@card.question%></p>
   <form action="/card/<%=@card.id%>" method="post">
     Answer: <input type="text" name="card[answer]">
     <input type="submit" value="Submit">

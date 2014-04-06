@@ -11,3 +11,49 @@ th {
 .error {
   color: red;
 }
+
+label
+{
+width: 5em;
+float: left;
+/*text-align: right;*/
+margin-right: 0.5em;
+display: block
+}
+
+form > input
+{
+color: #781351;
+background: #fee3ad;
+border: 1px solid #781351;
+margin-top: 5px;
+}
+
+.submit input
+{
+color: #000;
+background: #ffa20f;
+border: 2px outset #d7b9c9;
+}
+
+.button {
+  margin-left: 88px;
+}
+
+.submit input
+{
+margin-left: 4.5em;
+}
+
+h1 {
+  color: #500000
+}
+
+body {
+  background: #CC6699;
+  font-family: cursive;
+}
+
+.question {
+  font-size: 150%;
+}

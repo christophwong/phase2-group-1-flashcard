@@ -18,3 +18,30 @@ th {
   right: 100px;
   top: 0;
 }
+
+fieldset {
+  clear: both;
+  width: 560px;
+}
+
+label {
+  width: 150px;
+  float: left;
+  margin-top: 8px;
+  text-align: right;
+  margin-right: 3px;
+}
+
+input {
+  width:300px;
+  float: left;
+  margin-top: 5px;
+}
+
+input[type=submit] {
+  width: 180px;
+  padding:5px 15px; background:#ccc; border:0 none;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}

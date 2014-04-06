@@ -1,8 +1,8 @@
-<%= @correct_guesses.length.to_s + "/" + @round_guesses.length.to_s + "correct" %>
+<p class="stats"><%= @correct_guesses.length.to_s + "/" + @round_guesses.length.to_s + "correct" %></p>
 
 
 <h2>Questions You Suck At</h2>
-<ul>
+<ul class="stats">
   <% @incorrect_guesses.each do |guess| %>
   <li><%= guess.card.question %></li>
   <% end %>
@@ -10,9 +10,8 @@
 
 <h2>Question You Rock At</h2>
 
-<ul>
+<ul class="stats">
   <% @correct_guesses.each do |guess| %>
   <li><%= guess.card.question %></li>
   <% end %>
-
 </ul>

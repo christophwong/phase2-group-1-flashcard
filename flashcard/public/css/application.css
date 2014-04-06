@@ -2,8 +2,8 @@
   margin: 20px auto;
   width: 600px;
   padding: 0px 20px 20px 20px;
-  border: 1px dotted black;
 }
+
 th {
   text-align: left;
 }
@@ -16,5 +16,85 @@ th {
 .user_id {
   position: absolute;
   right: 100px;
-  top: 0;
+  top: 5px;
 }
+
+fieldset {
+  clear: both;
+  width: 560px;
+}
+
+label {
+  width: 150px;
+  float: left;
+  margin-top: 8px;
+  text-align: right;
+  margin-right: 3px;
+}
+
+input {
+  width:300px;
+  float: left;
+  margin-top: 5px;
+}
+
+input[type=submit] {
+  width: 180px;
+  padding:5px 15px; background:#05c0ff; border:0 none;
+  cursor:pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+
+.card input[type=submit]{
+  margin-left: 200px;
+
+}
+
+h1, h2{
+  background: #000;
+  color: #FFF;
+  text-align: center;
+  padding: 10px;
+}
+
+body{
+  background: lightgray;
+}
+
+ul li {
+  list-style: none;
+}
+
+ul li a {
+  text-decoration: none;
+  font-size: 2em;
+  font-family: "Verdana";
+  font-weight: 800;
+  color: #DC143C;
+  border: 1px solid #A9A9A9;
+  border-radius: 5px;
+  padding: 0 5px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1.2em;
+  color: #8B0000;
+}
+
+p {
+  font-size: 1em;
+  text-align: center;
+}
+
+.stats {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0;
+}
+
+

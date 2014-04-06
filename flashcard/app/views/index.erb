@@ -1,25 +1,28 @@
 <div class="container">
   <h1>Welcome to Flashy!</h1>
-  <p>Please sign in</p>
 
-  <form method="post" action="/decks">
-    <label for="email">Email:</label><input type="text" name="email"><br>
-    <label for="password">Password:</label><input type="password" name="password"><br>
-    <input class="button" type="submit" value="Log In"><br><br>
+  <form method="post" action="/decks" class="sign-in">
+    <fieldset>
+      <legend>Please sign in</legend>
+      <label for="email">Email: </label><input type="text" name="email">
+      <label for="password">Password: </label><input type="password" name="password">
+      <input class="button" type="submit" value="Log In">
+    </fieldset>
   </form>
 
-  <p>Or Create an Account!!!!!</p><br>
-
   <% if @error %>
-    <p class="error">Your password doesn't match the password confirmation...please try again. : 0 )</p><br>
+    <p class="error">Your password doesn't match the password confirmation...please try again. : 0 )</p>
   <% end %>
 
-  <form method="post" action="/new_user">
-    <label for="name">Name:</label><input type="text" name="name"><br>
-    <label for="email">Email:</label><input type="text" name="email"><br>
-    <label for="password">Password:</label><input type="password" name="password"><br>
-    <label for="confirmation">Confirm Password:</label><input type="password" name="confirmation"><br>
-    <input type="submit" value="Create Account"><br>
+  <form method="post" action="/new_user" class="create-user">
+    <fieldset>
+      <legend>Or Create an Account!!!!!</legend>
+      <label for="name">Name: </label><input type="text" name="name">
+      <label for="email">Email: </label><input type="text" name="email">
+      <label for="password">Password: </label><input type="password" name="password">
+      <label for="confirmation">Confirm Password: </label><input type="password" name="confirmation">
+      <input type="submit" value="Create Account">
+    </fieldset>
   </form>
 
 

@@ -1,0 +1,7 @@
+<form action="/card/new" method="post" class="container">
+  <% @count.to_i.times do |n|%>
+    <label for=<%"question" + n.to_s%>>Question:</label><input type="text" name=<%="question" + n.to_s%>>
+    <label for=<%"answer" + n.to_s%>>Answer:</label><input type="text" name=<%="answer" + n.to_s%>>
+  <% end %>
+  <input type="submit" value="Create Cards">
+</form>
